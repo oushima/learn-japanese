@@ -127,6 +127,7 @@ async function startQuiz(quizId, quiz) {
         if (isCorrect) {
           input.parentNode.classList.add("correct");
           input.parentNode.classList.remove("wrong");
+          input.parentNode.classList.remove("selected");
           input.disabled = true;
 
           // Focus the next input if the answer is correct
@@ -163,6 +164,7 @@ async function startQuiz(quizId, quiz) {
           if (isCorrect) {
             input.parentNode.classList.add("correct");
             input.parentNode.classList.remove("wrong");
+            input.parentNode.classList.remove("selected");
             input.disabled = true;
 
             // Focus the next input if the answer is correct
@@ -176,6 +178,21 @@ async function startQuiz(quizId, quiz) {
             }
           }
         }
+      });
+
+      // Add event listeners for focus and blur
+      input.addEventListener("focus", () => {
+        // Remove the 'deselected' class if it's present
+        input.parentNode.classList.remove("deselected");
+        // Add the 'selected' class
+        input.parentNode.classList.add("selected");
+      });
+
+      input.addEventListener("blur", () => {
+        // Remove the 'selected' class
+        input.parentNode.classList.remove("selected");
+        // Add the 'deselected' class
+        input.parentNode.classList.add("deselected");
       });
     });
   }
