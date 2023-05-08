@@ -306,7 +306,7 @@ function restartQuiz() {
 }
 
 function isKana(str) {
-  const kanaRegExp = /^[\s\u3000\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FAF\u30FC]+$/;
+  const kanaRegExp = /^[\s\u3000\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FAF\u30FCっ]+$/;
   return kanaRegExp.test(str);
 }
 
@@ -329,6 +329,7 @@ const hiraganaToRomaji = {
   た: "ta",
   ち: "chi",
   つ: "tsu",
+  っ: "tsu",
   て: "te",
   と: "to",
   な: "na",
