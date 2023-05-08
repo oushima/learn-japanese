@@ -27,7 +27,6 @@ const displayResults = () => {
     <p>Percentage Correct: ${(correct / total) * 100}%</p>
   `;
   results.hidden = false;
-  restartBtn.hidden = false;
 };
 
 async function loadQuizzes() {
@@ -75,6 +74,7 @@ async function displayQuizzes() {
 async function startQuiz(quizId, quiz) {
   originalQuizId = quizId;
   originalQuiz = quiz;
+  restartBtn.style.display = "block";
 
   function updateQuiz(reverse, shuffle) {
     wordGrid.innerHTML = "";
@@ -229,7 +229,6 @@ function restartQuiz() {
     input.disabled = false;
   });
   results.hidden = true;
-  restartBtn.hidden = true;
 
   quizId = originalQuizId;
   quiz = originalQuiz;
