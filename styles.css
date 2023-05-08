@@ -3,8 +3,9 @@
   --color-2: rgb(171, 150, 211);
 }
 
-html, body {
-    background: white;
+html,
+body {
+  background: white;
 }
 
 body {
@@ -121,4 +122,11 @@ input[type="checkbox"] {
 
 a {
   text-decoration: none;
+}
+
+@media (max-width: 767px) {
+  .quiz-list {
+    flex-direction: column;
+    margin: 0px 56px;
+  }
 }
