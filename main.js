@@ -109,7 +109,9 @@ async function startQuiz(quizId, quiz) {
   }
 
   function attachEventListeners() {
-    wordGrid.querySelectorAll("input").forEach((input, index) => {
+    const inputs = wordGrid.querySelectorAll("input");
+
+    inputs.forEach((input, index) => {
       input.addEventListener("blur", () => {
         const answer = input.getAttribute("data-answer");
         const possibleAnswers = answer
@@ -126,9 +128,52 @@ async function startQuiz(quizId, quiz) {
           input.parentNode.classList.add("correct");
           input.parentNode.classList.remove("wrong");
           input.disabled = true;
+
+          // Focus the next input if the answer is correct
+          const nextInput = inputs[index + 1];
+          if (nextInput) {
+            nextInput.focus();
+          }
         } else if (input.value.trim() !== "") {
           if (!input.parentNode.classList.contains("correct")) {
             input.parentNode.classList.add("wrong");
+          }
+        }
+      });
+
+      input.addEventListener("keydown", (event) => {
+        if (
+          event.key === "Enter" ||
+          event.key === "Tab" ||
+          event.key === "Return"
+        ) {
+          event.preventDefault();
+
+          const answer = input.getAttribute("data-answer");
+          const possibleAnswers = answer
+            .split(",")
+            .map((ans) => ans.trim().toLowerCase());
+          const userAnswers = input.value
+            .split(",")
+            .map((ans) => ans.trim().toLowerCase());
+
+          const isCorrect = userAnswers.every((ans) =>
+            possibleAnswers.includes(ans)
+          );
+          if (isCorrect) {
+            input.parentNode.classList.add("correct");
+            input.parentNode.classList.remove("wrong");
+            input.disabled = true;
+
+            // Focus the next input if the answer is correct
+            const nextInput = inputs[index + 1];
+            if (nextInput) {
+              nextInput.focus();
+            }
+          } else if (input.value.trim() !== "") {
+            if (!input.parentNode.classList.contains("correct")) {
+              input.parentNode.classList.add("wrong");
+            }
           }
         }
       });
