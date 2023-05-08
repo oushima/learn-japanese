@@ -122,7 +122,7 @@ async function startQuiz(quizId, quiz) {
         if (e.key === "Tab") {
           e.preventDefault();
           const answer = input.getAttribute("data-answer");
-          if (input.value.trim() === answer) {
+          if (input.value.trim().toLowerCase() === answer) {
             input.parentNode.classList.add("correct");
             const nextInput = wordGrid.querySelector(
               `input[data-index="${index + 1}"]`
@@ -140,7 +140,7 @@ async function startQuiz(quizId, quiz) {
 
       input.addEventListener("blur", () => {
         const answer = input.getAttribute("data-answer");
-        if (input.value.trim() === answer) {
+        if (input.value.trim().toLowerCase() === answer) {
           input.parentNode.classList.add("correct");
           input.parentNode.classList.remove("wrong");
           input.disabled = true;
@@ -183,10 +183,10 @@ async function startQuiz(quizId, quiz) {
   // Rest of the startQuiz function
   wordGrid.querySelectorAll("input").forEach((input, index) => {
     input.addEventListener("keydown", (e) => {
-      if (e.key === "Tab") {
+      if (e.key === "Tab" || e.key === "Enter") {
         e.preventDefault();
         const answer = input.getAttribute("data-answer");
-        if (input.value === answer) {
+        if (input.value.toLowerCase() === answer) {
           input.parentNode.classList.add("correct");
           const nextInput = wordGrid.querySelector(
             `input[data-index="${index + 1}"]`
@@ -204,7 +204,7 @@ async function startQuiz(quizId, quiz) {
 
     input.addEventListener("blur", () => {
       const answer = input.getAttribute("data-answer");
-      if (input.value.trim() === answer) {
+      if (input.value.trim().toLowerCase() === answer) {
         input.parentNode.classList.add("correct");
         input.parentNode.classList.remove("wrong");
         input.disabled = true;
