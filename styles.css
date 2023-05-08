@@ -23,7 +23,8 @@ body {
 
 .word-container {
   min-width: 100px;
-  height: 100px;
+  min-height: 100px;
+  text-align: center;
   border-radius: 6px;
   padding: 10px;
   background-image: linear-gradient(var(--color-1) 0%, var(--color-2) 50%);
