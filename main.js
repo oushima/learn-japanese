@@ -46,7 +46,6 @@ async function loadQuizzes() {
       const quizName = quizData.name; // Extract the quiz name from the 'name' property
       const quiz = quizData.questions; // Use the 'questions' property as the quiz data
       quizzes[`quiz${quizIndex}`] = { name: quizName, data: quiz };
-      console.log(`Loaded quiz${quizIndex}.json`, quiz);
       quizIndex++;
     } catch (error) {
       console.error(`Error while loading quiz${quizIndex}.json`, error);
@@ -104,8 +103,9 @@ async function startQuiz(quizId, quiz) {
       if (translationMode.checked && isKana(item.word)) {
         const romaji = kanaToRomaji(item.word);
         container.querySelector("div").textContent = romaji;
-      }      
-
+      } else {
+        container.querySelector("div").textContent = item.word;
+      }
       wordGrid.appendChild(container);
     });
 
@@ -159,7 +159,8 @@ async function startQuiz(quizId, quiz) {
           event.preventDefault();
 
           const answer = input.getAttribute("data-answer");
-          const possibleAnswers = answer.replace(".", "")
+          const possibleAnswers = answer
+            .replace(".", "")
             .split(",")
             .map((ans) => ans.trim().toLowerCase());
           const userAnswers = input.value
@@ -215,6 +216,10 @@ async function startQuiz(quizId, quiz) {
   });
 
   reverseMode.addEventListener("change", () => {
+    updateQuiz(reverseMode.checked, shuffleMode.checked);
+  });
+
+  translationMode.addEventListener("change", () => {
     updateQuiz(reverseMode.checked, shuffleMode.checked);
   });
 
@@ -306,7 +311,8 @@ function restartQuiz() {
 }
 
 function isKana(str) {
-  const kanaRegExp = /^[\s\u3000\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FAF\u30FCっ]+$/;
+  const kanaRegExp =
+    /^[\s\u3000\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FAF\u30FCっ]+$/;
   return kanaRegExp.test(str);
 }
 
@@ -502,7 +508,7 @@ const katakanaToRomaji = {
 };
 
 function kanaToRomaji(kanaStr) {
-  let romajiStr = '';
+  let romajiStr = "";
   let skipNext = false;
 
   for (let i = 0; i < kanaStr.length; i++) {
@@ -531,7 +537,6 @@ function kanaToRomaji(kanaStr) {
 
   return romajiStr;
 }
-
 
 restartBtn.onclick = restartQuiz;
 
