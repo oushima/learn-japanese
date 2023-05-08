@@ -123,4 +123,8 @@ a {
     flex-direction: column;
     margin: 0px 56px;
   }
+
+  .modes-container {
+    flex-wrap: wrap;
+  }
 }
