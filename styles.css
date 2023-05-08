@@ -118,6 +118,29 @@ a {
   text-decoration: none;
 }
 
+.perfect-score {
+  color: black;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+.bad-score {
+  color: red;
+}
+
+.results {
+  margin: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.results-percentage {
+  position: relative;
+  bottom: 4.5px;
+}
+
 @media (max-width: 912px) {
   .quiz-list {
     flex-direction: column;

@@ -10,6 +10,7 @@ const translationMode = document.getElementById("translation-mode");
 
 let originalQuiz;
 let originalQuizId;
+let mistakes = [];
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -24,12 +25,20 @@ const displayResults = () => {
   const correct = wordGrid.querySelectorAll(".correct").length;
   const wrong = wordGrid.querySelectorAll(".wrong").length;
 
+  let percentageCorrect = Math.round(
+    ((correct - mistakes.length) / total) * 100
+  );
+  let percentageClass =
+    percentageCorrect === 100 ? "perfect-score" : "bad-score";
+  const emojiGoodOrBad = percentageCorrect === 100 ? ` ✨` : "😂";
+
   results.innerHTML = `
-    <p>Correct: ${correct}</p>
-    <p>Wrong: ${wrong}</p>
-    <p>Percentage Correct: ${(correct / total) * 100}%</p>
+    <div class="${percentageClass}">Wrong: ${mistakes.length}</div>
+    <div class="${percentageClass}">Correct: ${correct - mistakes.length}</div>
+    <div class="${percentageClass} results-percentage">Percentage Correct: ${percentageCorrect}% ${emojiGoodOrBad}</div>
   `;
   results.hidden = false;
+  mistakes = [];
 };
 
 async function loadQuizzes() {
@@ -156,6 +165,7 @@ async function startQuiz(quizId, quiz) {
         } else if (input.value.trim() !== "") {
           if (!input.parentNode.classList.contains("correct")) {
             input.parentNode.classList.add("wrong");
+            mistakes.push(possibleAnswers[0]);
           }
         }
       });
