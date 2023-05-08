@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Learn Japanese</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+  </head>
+  <body>
+    <div class="navigation-bar">
+      <a
+        style="display: flex; color: black"
+        href="#"
+        onclick="location.reload();"
+      >
+        <h1 class="center-text">Learn Japanese</h1>
+      </a>
+      <a
+        style="display: flex; color: black"
+        href="#"
+        onclick="location.reload();"
+      >
+        <i class="fas fa-home" style="display: flex; align-self: center"></i>
+      </a>
+    </div>
+    <div id="quiz-selector">
+      <h2 class="center-text">Select Quiz:</h2>
+      <div class="quiz-list" id="quiz-list"></div>
+    </div>
+    <div id="quiz-container" hidden>
+      <div class="modes-container">
+        <div>
+          <input type="checkbox" id="reverse-mode" />
+          <label for="reverse-mode">Reverse mode</label>
+        </div>
+        <div>
+          <input type="checkbox" id="autoplay-mode" />
+          <label for="autoplay-mode">Autoplay mode</label>
+        </div>
+        <div>
+          <input type="checkbox" id="shuffle-mode" />
+          <label for="shuffle-mode">Shuffle mode</label>
+        </div>
+      </div>
+      <div id="word-grid"></div>
+      <div id="results" hidden></div>
+      <button id="restart-btn" hidden>Restart Quiz</button>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
