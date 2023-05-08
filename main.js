@@ -16,6 +16,7 @@ function shuffleArray(array) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
+  return array;
 }
 
 const displayResults = () => {
@@ -58,7 +59,6 @@ async function loadQuizzes() {
 
 async function displayQuizzes() {
   const quizzes = await loadQuizzes();
-  console.log("Quizzes:", quizzes);
 
   for (const [quizId, quiz] of Object.entries(quizzes)) {
     const button = document.createElement("button");
@@ -78,34 +78,44 @@ async function startQuiz(quizId, quiz) {
   restartBtn.style.display = "block";
 
   function updateQuiz(reverse, shuffle) {
+    let quizItems = shuffle ? shuffleArray([...quiz.data]) : [...quiz.data];
+    originalQuiz = [...quiz.data];
     wordGrid.innerHTML = "";
-
-    let quizItems = quiz.data;
-    if (shuffle) {
-      // Make a copy of the quiz data before shuffling it
-      quizItems = quiz.data.slice();
-      shuffleArray(quizItems);
-    } else {
-      quizItems = quiz.data.slice();
-    }
 
     quizItems.forEach((item, index) => {
       const container = document.createElement("div");
       container.className = "word-container";
+      let word = item.word;
+      let answer = item.answer;
+
+      if (reverse) {
+        if (isKana(item.word)) {
+          item.word += `, ${kanaToRomaji(item.word)}`;
+        }
+        word = item.answer;
+        answer = item.word;
+      } else {
+        word = quizItems[index].word.split(",")[0];
+        answer = quizItems[index].answer;
+      }
+
+      if (translationMode.checked && isKana(word)) {
+        if (reverse) {
+          const itemCopy = { ...item };
+          item.word = itemCopy.answer;
+          item.answer = itemCopy.word;
+          word = item.word;
+          answer = item.answer;
+        }
+        const romaji = kanaToRomaji(word);
+        word = romaji;
+      }
+
       container.innerHTML = `
-        <div>${reverse ? item.answer : item.word}</div>
-        <input type="text" data-answer="${
-          reverse ? item.word : item.answer
-        }" data-index="${index}">
+        <div>${word}</div>
+        <input type="text" data-answer="${answer}" data-index="${index}">
       `;
 
-      // Translate hiragana and katakana to romaji if the translation mode is enabled
-      if (translationMode.checked && isKana(item.word)) {
-        const romaji = kanaToRomaji(item.word);
-        container.querySelector("div").textContent = romaji;
-      } else {
-        container.querySelector("div").textContent = item.word;
-      }
       wordGrid.appendChild(container);
     });
 
@@ -272,6 +282,7 @@ function autoplay(reverse) {
       input.value = answer;
       input.parentNode.classList.add("correct");
       input.parentNode.classList.remove("wrong");
+      input.parentNode.classList.remove("selected");
       input.disabled = true;
 
       inputIndex++;

@@ -3,7 +3,7 @@
   "questions": [
     { "word": "なまえ", "answer": "name, naam" },
     { "word": "しゅくだい", "answer": "homework, huiswerk" },
-    { "word": "テスト", "answer": "exam/test, examen/toets" },
+    { "word": "テスト", "answer": "test, toets" },
     { "word": "しつもん", "answer": "question, vraag" },
     { "word": "こたえ", "answer": "answer, antwoord" },
     {
