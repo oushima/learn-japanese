@@ -87,6 +87,7 @@ input[type="checkbox"] {
 
 .center-text {
   text-align: center;
+  margin: 0px;
 }
 
 .quiz-list {
@@ -112,6 +113,7 @@ input[type="checkbox"] {
   display: flex;
   justify-content: center;
   gap: 24px;
+  margin: 12px 0px;
 }
 
 a {
@@ -139,6 +141,11 @@ a {
 .results-percentage {
   position: relative;
   bottom: 4.5px;
+}
+
+.learn-japanese {
+  margin: 56px 24px;
+  margin-bottom: 4px;
 }
 
 @media (max-width: 912px) {

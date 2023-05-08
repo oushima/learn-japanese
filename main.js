@@ -7,6 +7,8 @@ const restartBtn = document.getElementById("restart-btn");
 const shuffleMode = document.getElementById("shuffle-mode");
 const reverseMode = document.getElementById("reverse-mode");
 const translationMode = document.getElementById("translation-mode");
+const cardsElement = document.getElementById("cards");
+const homeBtnElement = document.getElementById("home-btn");
 
 let originalQuiz;
 let originalQuizId;
@@ -85,6 +87,9 @@ async function startQuiz(quizId, quiz) {
   originalQuizId = quizId;
   originalQuiz = quiz;
   restartBtn.style.display = "block";
+  cardsElement.textContent = `Cards: ${quiz.data.length}`;
+  cardsElement.style.display = "block";
+  homeBtnElement.style.display = "flex";
 
   function updateQuiz(reverse, shuffle) {
     let quizItems = shuffle ? shuffleArray([...quiz.data]) : [...quiz.data];

@@ -2,7 +2,10 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
     <title>Learn Japanese</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="styles.css" />
@@ -16,25 +19,30 @@
     />
   </head>
   <body>
+    <a
+      style="display: flex; color: black; flex-direction: column"
+      href="#"
+      onclick="location.reload();"
+    >
+      <h1 class="center-text learn-japanese">Learn Japanese</h1>
+    </a>
+    <small id="cards" style="display: none; text-align: center;"></small>
     <div class="navigation-bar">
       <a
-        style="display: flex; color: black"
+        id="home-btn"
+        style="display: none; color: black"
         href="#"
         onclick="location.reload();"
       >
-        <h1 class="center-text">Learn Japanese</h1>
-      </a>
-      <a
-        style="display: flex; color: black"
-        href="#"
-        onclick="location.reload();"
-      >
-        <i class="fas fa-home" style="display: flex; align-self: center"></i>
+        <i
+          class="fas fa-home icons"
+          style="display: flex; align-self: center"
+        ></i>
       </a>
       <i
         hidden
         id="restart-btn"
-        class="fas fa-redo-alt"
+        class="fas fa-redo-alt icons"
         style="
           display: flex;
           align-self: center;
@@ -44,7 +52,7 @@
       ></i>
     </div>
     <div id="quiz-selector">
-      <h2 class="center-text">Select Quiz:</h2>
+      <h2 class="center-text" style="margin-bottom: 24px">Select Quiz:</h2>
       <div class="quiz-list" id="quiz-list"></div>
     </div>
     <div id="quiz-container" hidden>
