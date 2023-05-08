@@ -28,7 +28,7 @@ const displayResults = () => {
   `;
   results.hidden = false;
   restartBtn.hidden = false;
-}
+};
 
 async function loadQuizzes() {
   const quizzes = {};
@@ -56,8 +56,6 @@ async function loadQuizzes() {
   return quizzes;
 }
 
-
-
 async function displayQuizzes() {
   const quizzes = await loadQuizzes();
   console.log("Quizzes:", quizzes);
@@ -73,8 +71,6 @@ async function displayQuizzes() {
     quizList.appendChild(button);
   }
 }
-
-
 
 async function startQuiz(quizId, quiz) {
   originalQuizId = quizId;
@@ -94,7 +90,7 @@ async function startQuiz(quizId, quiz) {
     if (shuffle) {
       shuffleArray(quizItems);
       quiz = quizItems;
-    } 
+    }
 
     quizItems.forEach((item, index) => {
       const container = document.createElement("div");
@@ -118,34 +114,26 @@ async function startQuiz(quizId, quiz) {
 
   function attachEventListeners() {
     wordGrid.querySelectorAll("input").forEach((input, index) => {
-      input.addEventListener("keydown", (e) => {
-        if (e.key === "Tab") {
-          e.preventDefault();
-          const answer = input.getAttribute("data-answer");
-          if (input.value.trim().toLowerCase() === answer) {
-            input.parentNode.classList.add("correct");
-            const nextInput = wordGrid.querySelector(
-              `input[data-index="${index + 1}"]`
-            );
-            if (nextInput) {
-              nextInput.focus();
-            } else {
-              displayResults();
-            }
-          } else {
-            input.parentNode.classList.add("wrong");
-          }
-        }
-      });
-
       input.addEventListener("blur", () => {
         const answer = input.getAttribute("data-answer");
-        if (input.value.trim().toLowerCase() === answer) {
+        const possibleAnswers = answer
+          .split(",")
+          .map((ans) => ans.trim().toLowerCase());
+        const userAnswers = input.value
+          .split(",")
+          .map((ans) => ans.trim().toLowerCase());
+
+        const isCorrect = userAnswers.every((ans) =>
+          possibleAnswers.includes(ans)
+        );
+        if (isCorrect) {
           input.parentNode.classList.add("correct");
           input.parentNode.classList.remove("wrong");
           input.disabled = true;
         } else if (input.value.trim() !== "") {
-          input.parentNode.classList.add("wrong");
+          if (!input.parentNode.classList.contains("correct")) {
+            input.parentNode.classList.add("wrong");
+          }
         }
       });
     });
@@ -180,40 +168,6 @@ async function startQuiz(quizId, quiz) {
     autoplay(reverseMode.checked);
   }
 
-  // Rest of the startQuiz function
-  wordGrid.querySelectorAll("input").forEach((input, index) => {
-    input.addEventListener("keydown", (e) => {
-      if (e.key === "Tab" || e.key === "Enter") {
-        e.preventDefault();
-        const answer = input.getAttribute("data-answer");
-        if (input.value.toLowerCase() === answer) {
-          input.parentNode.classList.add("correct");
-          const nextInput = wordGrid.querySelector(
-            `input[data-index="${index + 1}"]`
-          );
-          if (nextInput) {
-            nextInput.focus();
-          } else {
-            displayResults();
-          }
-        } else {
-          input.parentNode.classList.add("wrong");
-        }
-      }
-    });
-
-    input.addEventListener("blur", () => {
-      const answer = input.getAttribute("data-answer");
-      if (input.value.trim().toLowerCase() === answer) {
-        input.parentNode.classList.add("correct");
-        input.parentNode.classList.remove("wrong");
-        input.disabled = true;
-      } else if (input.value.trim() !== "") {
-        input.parentNode.classList.add("wrong");
-      }
-    });
-  });
-
   let selectedContainer = null;
 
   wordGrid.querySelectorAll(".word-container input").forEach((input, index) => {
@@ -245,10 +199,11 @@ function autoplay(reverse) {
       input.focus();
       input.value = answer;
       input.parentNode.classList.add("correct");
+      input.parentNode.classList.remove("wrong");
       input.disabled = true;
 
       inputIndex++;
-      setTimeout(fillAnswer, 30); // 1-second delay between answers
+      setTimeout(fillAnswer, 30);
     } else {
       displayResults();
     }
