@@ -75,21 +75,17 @@ async function displayQuizzes() {
 async function startQuiz(quizId, quiz) {
   originalQuizId = quizId;
   originalQuiz = quiz;
-  function getDisplayedText(item, reverse) {
-    return reverse ? item.answer : item.word;
-  }
-
-  function getAnswer(item, reverse) {
-    return reverse ? item.word : item.answer;
-  }
 
   function updateQuiz(reverse, shuffle) {
     wordGrid.innerHTML = "";
 
     let quizItems = quiz.data;
     if (shuffle) {
+      // Make a copy of the quiz data before shuffling it
+      quizItems = quiz.data.slice();
       shuffleArray(quizItems);
-      quiz = quizItems;
+    } else {
+      quizItems = quiz.data.slice();
     }
 
     quizItems.forEach((item, index) => {
@@ -186,6 +182,7 @@ async function startQuiz(quizId, quiz) {
       input.parentNode.classList.add("deselected");
     });
   });
+  updateQuiz(reverseMode.checked, shuffleMode.checked);
 }
 
 function autoplay(reverse) {
