@@ -1,55 +1,55 @@
 {
   "name": "Classroom Expressions",
   "questions": [
-    { "word": "なまえ", "answer": "name, naam, namae" },
-    { "word": "しゅくだい", "answer": "homework, huiswerk, shukudai" },
-    { "word": "テスト", "answer": "exam/test, examen/toets, tesuto" },
-    { "word": "しつもん", "answer": "question, vraag, shitsumon" },
-    { "word": "こたえ", "answer": "answer, antwoord, kotae" },
+    { "word": "なまえ", "answer": "name, naam" },
+    { "word": "しゅくだい", "answer": "homework, huiswerk" },
+    { "word": "テスト", "answer": "exam/test, examen/toets" },
+    { "word": "しつもん", "answer": "question, vraag" },
+    { "word": "こたえ", "answer": "answer, antwoord" },
     {
       "word": "おはよう ございます",
-      "answer": "Good morning., Goedemorgen., ohayou gozaimasu"
+      "answer": "Good morning., Goedemorgen."
     },
     {
       "word": "こんにちは",
-      "answer": "Good afternoon., Goedemiddag., konnichiwa"
+      "answer": "Good afternoon., Goedemiddag."
     },
-    { "word": "すみません", "answer": "Excuse me., Sorry., sumimasen" },
+    { "word": "すみません", "answer": "Excuse me., Sorry." },
     {
       "word": "わかりません",
-      "answer": "I do not understand., Ik begrijp het niet., wakarimasen"
+      "answer": "I do not understand., Ik begrijp het niet."
     },
     {
       "word": "もう いちど",
-      "answer": "One more time., Nog een keer., mou ichido"
+      "answer": "One more time., Nog een keer."
     },
     {
       "word": "ありがとう ございます",
-      "answer": "Thank you., Dankjewel., arigatou gozaimasu"
+      "answer": "Thank you., Dankjewel."
     },
     {
       "word": "また らいしゅう",
-      "answer": "See you next week., Tot volgende week., mata raishuu"
+      "answer": "See you next week., Tot volgende week."
     },
     {
       "word": "きいて ください",
-      "answer": "Please listen., Luister alsjeblieft., kiite kudasai"
+      "answer": "Please listen., Luister alsjeblieft."
     },
     {
       "word": "みて ください",
-      "answer": "Please look., Kijk alsjeblieft., mite kudasai"
+      "answer": "Please look., Kijk alsjeblieft."
     },
     {
       "word": "いって ください",
-      "answer": "Please say., Zeg alsjeblieft., itte kudasai"
+      "answer": "Please say., Zeg alsjeblieft."
     },
     {
       "word": "よんで ください",
-      "answer": "Please read., Lees alsjeblieft., yonde kudasai"
+      "answer": "Please read., Lees alsjeblieft."
     },
     {
       "word": "かいて ください",
-      "answer": "Please write., Schrijf alsjeblieft., kaite kudasai"
+      "answer": "Please write., Schrijf alsjeblieft."
     }
   ]
 }

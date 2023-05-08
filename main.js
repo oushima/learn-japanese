@@ -6,6 +6,8 @@ const results = document.getElementById("results");
 const restartBtn = document.getElementById("restart-btn");
 const shuffleMode = document.getElementById("shuffle-mode");
 const reverseMode = document.getElementById("reverse-mode");
+const translationMode = document.getElementById("translation-mode");
+
 let originalQuiz;
 let originalQuizId;
 
@@ -98,6 +100,12 @@ async function startQuiz(quizId, quiz) {
         }" data-index="${index}">
       `;
 
+      // Translate hiragana and katakana to romaji if the translation mode is enabled
+      if (translationMode.checked && isKana(item.word)) {
+        const romaji = kanaToRomaji(item.word);
+        container.querySelector("div").textContent = romaji;
+      }      
+
       wordGrid.appendChild(container);
     });
 
@@ -122,7 +130,7 @@ async function startQuiz(quizId, quiz) {
           .map((ans) => ans.trim().toLowerCase());
 
         const isCorrect = userAnswers.every((ans) =>
-          possibleAnswers.includes(ans)
+          possibleAnswers.includes(ans.replace(".", ""))
         );
         if (isCorrect) {
           input.parentNode.classList.add("correct");
@@ -151,7 +159,7 @@ async function startQuiz(quizId, quiz) {
           event.preventDefault();
 
           const answer = input.getAttribute("data-answer");
-          const possibleAnswers = answer
+          const possibleAnswers = answer.replace(".", "")
             .split(",")
             .map((ans) => ans.trim().toLowerCase());
           const userAnswers = input.value
@@ -159,7 +167,7 @@ async function startQuiz(quizId, quiz) {
             .map((ans) => ans.trim().toLowerCase());
 
           const isCorrect = userAnswers.every((ans) =>
-            possibleAnswers.includes(ans)
+            possibleAnswers.includes(ans.replace(".", ""))
           );
           if (isCorrect) {
             input.parentNode.classList.add("correct");
@@ -296,6 +304,233 @@ function restartQuiz() {
   quiz = originalQuiz;
   startQuiz(quizId, quiz);
 }
+
+function isKana(str) {
+  const kanaRegExp = /^[\s\u3000\u3040-\u309F\u30A0-\u30FF\uFF65-\uFF9F\u4E00-\u9FAF\u30FC]+$/;
+  return kanaRegExp.test(str);
+}
+
+const hiraganaToRomaji = {
+  あ: "a",
+  い: "i",
+  う: "u",
+  え: "e",
+  お: "o",
+  か: "ka",
+  き: "ki",
+  く: "ku",
+  け: "ke",
+  こ: "ko",
+  さ: "sa",
+  し: "shi",
+  す: "su",
+  せ: "se",
+  そ: "so",
+  た: "ta",
+  ち: "chi",
+  つ: "tsu",
+  て: "te",
+  と: "to",
+  な: "na",
+  に: "ni",
+  ぬ: "nu",
+  ね: "ne",
+  の: "no",
+  は: "ha",
+  ひ: "hi",
+  ふ: "fu",
+  へ: "he",
+  ほ: "ho",
+  ま: "ma",
+  み: "mi",
+  む: "mu",
+  め: "me",
+  も: "mo",
+  や: "ya",
+  ゆ: "yu",
+  よ: "yo",
+  ら: "ra",
+  り: "ri",
+  る: "ru",
+  れ: "re",
+  ろ: "ro",
+  わ: "wa",
+  を: "wo",
+  ん: "n",
+  が: "ga",
+  ぎ: "gi",
+  ぐ: "gu",
+  げ: "ge",
+  ご: "go",
+  ざ: "za",
+  じ: "ji",
+  ず: "zu",
+  ぜ: "ze",
+  ぞ: "zo",
+  だ: "da",
+  ぢ: "ji",
+  づ: "zu",
+  で: "de",
+  ど: "do",
+  ば: "ba",
+  び: "bi",
+  ぶ: "bu",
+  べ: "be",
+  ぼ: "bo",
+  ぱ: "pa",
+  ぴ: "pi",
+  ぷ: "pu",
+  ぺ: "pe",
+  ぽ: "po",
+  きゃ: "kya",
+  きゅ: "kyu",
+  きょ: "kyo",
+  しゃ: "sha",
+  しゅ: "shu",
+  しょ: "sho",
+  ちゃ: "cha",
+  ちゅ: "chu",
+  ちょ: "cho",
+  にゃ: "nya",
+  にゅ: "nyu",
+  にょ: "nyo",
+  ひゃ: "hya",
+  ひゅ: "hyu",
+  ひょ: "hyo",
+  みゃ: "mya",
+  みゅ: "myu",
+  みょ: "myo",
+  りゃ: "rya",
+  りゅ: "ryu",
+  りょ: "ryo",
+};
+
+const katakanaToRomaji = {
+  ア: "a",
+  イ: "i",
+  ウ: "u",
+  エ: "e",
+  オ: "o",
+  カ: "ka",
+  キ: "ki",
+  ク: "ku",
+  ケ: "ke",
+  コ: "ko",
+  サ: "sa",
+  シ: "shi",
+  ス: "su",
+  セ: "se",
+  ソ: "so",
+  タ: "ta",
+  チ: "chi",
+  ツ: "tsu",
+  テ: "te",
+  ト: "to",
+  ナ: "na",
+  ニ: "ni",
+  ヌ: "nu",
+  ネ: "ne",
+  ノ: "no",
+  ハ: "ha",
+  ヒ: "hi",
+  フ: "fu",
+  ヘ: "he",
+  ホ: "ho",
+  マ: "ma",
+  ミ: "mi",
+  ム: "mu",
+  メ: "me",
+  モ: "mo",
+  ヤ: "ya",
+  ユ: "yu",
+  ヨ: "yo",
+  ラ: "ra",
+  リ: "ri",
+  ル: "ru",
+  レ: "re",
+  ロ: "ro",
+  ワ: "wa",
+  ヲ: "wo",
+  ン: "n",
+  ガ: "ga",
+  ギ: "gi",
+  グ: "gu",
+  ゲ: "ge",
+  ゴ: "go",
+  ザ: "za",
+  ジ: "ji",
+  ズ: "zu",
+  ゼ: "ze",
+  ゾ: "zo",
+  ダ: "da",
+  ヂ: "ji",
+  ヅ: "zu",
+  デ: "de",
+  ド: "do",
+  バ: "ba",
+  ビ: "bi",
+  ブ: "bu",
+  ベ: "be",
+  ボ: "bo",
+  パ: "pa",
+  ピ: "pi",
+  プ: "pu",
+  ペ: "pe",
+  ポ: "po",
+  キャ: "kya",
+  キュ: "kyu",
+  キョ: "kyo",
+  シャ: "sha",
+  シュ: "shu",
+  ショ: "sho",
+  チャ: "cha",
+  チュ: "chu",
+  チョ: "cho",
+  ニャ: "nya",
+  ニュ: "nyu",
+  ニョ: "nyo",
+  ヒャ: "hya",
+  ヒュ: "hyu",
+  ヒョ: "hyo",
+  ミャ: "mya",
+  ミュ: "myu",
+  ミョ: "myo",
+  リャ: "rya",
+  リュ: "ryu",
+  リョ: "ryo",
+};
+
+function kanaToRomaji(kanaStr) {
+  let romajiStr = '';
+  let skipNext = false;
+
+  for (let i = 0; i < kanaStr.length; i++) {
+    if (skipNext) {
+      skipNext = false;
+      continue;
+    }
+
+    const kanaChar = kanaStr[i];
+    const kanaCharPair = kanaStr.slice(i, i + 2);
+
+    if (hiraganaToRomaji[kanaCharPair]) {
+      romajiStr += hiraganaToRomaji[kanaCharPair];
+      skipNext = true;
+    } else if (katakanaToRomaji[kanaCharPair]) {
+      romajiStr += katakanaToRomaji[kanaCharPair];
+      skipNext = true;
+    } else if (hiraganaToRomaji[kanaChar]) {
+      romajiStr += hiraganaToRomaji[kanaChar];
+    } else if (katakanaToRomaji[kanaChar]) {
+      romajiStr += katakanaToRomaji[kanaChar];
+    } else {
+      romajiStr += kanaChar;
+    }
+  }
+
+  return romajiStr;
+}
+
 
 restartBtn.onclick = restartQuiz;
 
