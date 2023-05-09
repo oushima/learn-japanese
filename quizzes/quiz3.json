@@ -12,12 +12,12 @@
     },
     {
       "word": "こんにちは",
-      "answer": "Good afternoon., Goedemiddag."
+      "answer": "Good afternoon., Hello, Goedemiddag., Hallo"
     },
     { "word": "すみません", "answer": "Excuse me., Sorry." },
     {
       "word": "わかりません",
-      "answer": "I do not understand., Ik begrijp het niet."
+      "answer": "I do not understand., I don't understand, Ik begrijp het niet."
     },
     {
       "word": "もう いちど",
@@ -41,7 +41,7 @@
     },
     {
       "word": "いって ください",
-      "answer": "Please say., Zeg alsjeblieft."
+      "answer": "Please go., Ga alsjeblieft."
     },
     {
       "word": "よんで ください",

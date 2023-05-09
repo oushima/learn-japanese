@@ -13,6 +13,7 @@ const homeBtnElement = document.getElementById("home-btn");
 let originalQuiz;
 let originalQuizId;
 let mistakes = [];
+let answeredQuestions = 1;
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -25,13 +26,13 @@ function shuffleArray(array) {
 const displayResults = () => {
   const total = wordGrid.querySelectorAll(".word-container").length;
   const correct = wordGrid.querySelectorAll(".correct").length;
-  const wrong = wordGrid.querySelectorAll(".wrong").length;
+  // const wrong = wordGrid.querySelectorAll(".wrong").length;
 
   let percentageCorrect = Math.round(
     ((correct - mistakes.length) / total) * 100
   );
-  let percentageClass =
-    percentageCorrect === 100 ? "perfect-score" : "bad-score";
+
+  let percentageClass = percentageCorrect === 100 ? "perfect-score" : "bad-score";
   const emojiGoodOrBad = percentageCorrect === 100 ? ` ✨` : "😂";
 
   results.innerHTML = `
@@ -39,7 +40,7 @@ const displayResults = () => {
     <div class="${percentageClass}">Correct: ${correct - mistakes.length}</div>
     <div class="${percentageClass} results-percentage">Percentage Correct: ${percentageCorrect}% ${emojiGoodOrBad}</div>
   `;
-  results.hidden = false;
+  results.style.display = "flex";
   mistakes = [];
 };
 
@@ -199,6 +200,15 @@ async function startQuiz(quizId, quiz) {
             input.parentNode.classList.add("correct");
             input.parentNode.classList.remove("wrong");
             input.parentNode.classList.remove("selected");
+
+            console.log(answeredQuestions, quiz.data.length)
+            if (answeredQuestions === quiz.data.length) {
+              console.log("123123");
+              displayResults();
+            } else {
+              answeredQuestions++;
+            }
+            
             input.disabled = true;
 
             // Focus the next input if the answer is correct
@@ -237,19 +247,23 @@ async function startQuiz(quizId, quiz) {
   updateQuiz(reverseMode.checked);
 
   shuffleMode.addEventListener("change", () => {
+    results.style.display = "none";
     updateQuiz(reverseMode.checked, shuffleMode.checked);
   });
 
   reverseMode.addEventListener("change", () => {
+    results.style.display = "none";
     updateQuiz(reverseMode.checked, shuffleMode.checked);
   });
 
   translationMode.addEventListener("change", () => {
+    results.style.display = "none";
     updateQuiz(reverseMode.checked, shuffleMode.checked);
   });
 
   // Update the line with the autoplayMode event listener
   autoplayMode.addEventListener("change", () => {
+    results.style.display = "none";
     if (autoplayMode.checked) {
       autoplay(reverseMode.checked);
     } else {
@@ -313,6 +327,7 @@ function autoplay(reverse) {
 // Inside the startQuiz function, after the line "updateQuiz(reverseMode.checked);"
 const autoplayMode = document.getElementById("autoplay-mode");
 autoplayMode.addEventListener("change", () => {
+  results.style.display = "none";
   if (autoplayMode.checked) {
     autoplay(reverseMode.checked);
   }

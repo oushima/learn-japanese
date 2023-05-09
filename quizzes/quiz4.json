@@ -1,0 +1,31 @@
+{
+  "name": "Lesson 1 - Vocabulary",
+  "questions": [
+    { "word": "わたし", "answer": "I, me, ik" },
+    { "word": "がくせい", "answer": "student, student" },
+    { "word": "んじん", "answer": "engineer, ingenieur" },
+    { "word": "エンジニア", "answer": "engineer, ingenieur" },
+    { "word": "～いん", "answer": "member, lid" },
+    { "word": "ぎんこういん", "answer": "bank employee, bankmedewerker" },
+    { "word": "かいしゃいん", "answer": "company employee, bedrijfsmedewerker" },
+    { "word": "せんせい", "answer": "teacher, leraar" },
+    { "word": "けんきゅういん", "answer": "researcher, onderzoeker" },
+    { "word": "にほんごがっこう", "answer": "Japanese school, Japanse school" },
+    { "word": "だいがく", "answer": "university, universiteit" },
+    { "word": "りょう", "answer": "dormitory, studentenhuis" },
+    { "word": "かんりにん", "answer": "manager, beheerder" },
+    { "word": "(お）なまえ", "answer": "name, naam" },
+    { "word": "(お）くに", "answer": "country, land" },
+    { "word": "しゅみ", "answer": "hobby, hobby" },
+    { "word": "すいえい", "answer": "swimming, zwemmen" },
+    { "word": "がっこう", "answer": "school, school" },
+    { "word": "ともだち", "answer": "friend, vriend" },
+    { "word": "はい", "answer": "yes, ja" },
+    { "word": "いいえ", "answer": "no, nee" },
+    { "word": "～さん", "answer": "Mr./Mrs./Miss, meneer/mevrouw/juffrouw" },
+    { "word": "そうです。", "answer": "That's right., Dat klopt." },
+    { "word": "はじめまして。", "answer": "Nice to meet you., Aangenaam kennis te maken." },
+    { "word": "どうぞ よろしく お ねがいします。", "answer": "Please be kind to me., Pleased to meet you." },
+    { "word": "(どうぞよろしく。）", "answer": "Please be kind., Pleased to meet you." }
+  ]
+}
